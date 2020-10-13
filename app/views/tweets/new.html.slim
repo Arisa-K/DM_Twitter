@@ -1,0 +1,8 @@
+h1 GeekTwitter
+h3 新規twitter
+= form_for @tweet do |f|
+    .field
+        = f.label :tweet
+        = f.text_field :body, :size=>140
+    =f.submit "Tweetする"
+=link_to "Tweet一覧に戻る",tweets_path

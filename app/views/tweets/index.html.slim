@@ -1,0 +1,26 @@
+h1
+| GeekTwitter
+h3
+| Tweet一覧
+= link_to "新規投稿へ", new_tweet_path
+
+= link_to 'ログアウト', destroy_user_session_path, method: :delete 
+
+.tweet-container
+    - @tweets.each do |t|
+        .tweet
+            = t.user.email
+            = t.body
+            = t.created_at
+            = link_to "詳細へ", tweet_path(t.id)
+            -if t.user_id == current_user.id
+                = link_to "編集する", edit_tweet_path(t.id)
+                = link_to "削除する", tweet_path(t.id), method: :delete
+            -else
+                -@like = Like.find_by(tweet_id: t.id, user_id: current_user.id)
+                -@likes = Like.where(tweet_id: t.id)
+                -if @like == nil
+                    = button_to "いいね", tweet_likes_path(t.id)
+                -else
+                    = button_to "いいね消す", tweet_like_path(t.id, @like.id), method: :delete
+                =@likes.count

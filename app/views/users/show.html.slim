@@ -1,0 +1,11 @@
+h1 ユーザー詳細ページ
+h3 = @user.email 
+h2 投稿内容
+-@user.tweets.each do |t|
+    = link_to t.body, tweet_path(t.id)
+h3 いいねしている投稿
+@user.liked_tweets.each do |post|
+    =tweet.user.email
+    =post.content
+= link_to "ユーザー一覧へ", users_path 
+= link_to "ホームへ戻る", tweets_path 

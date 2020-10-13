@@ -1,0 +1,27 @@
+h1 GeekTwitter
+h3 Tweet詳細
+.tweet
+    p = @tweet.body
+    p = @tweet.user.email
+    p = @tweet.created_at
+    = link_to "編集する", edit_tweet_path(@tweet.id)
+    br
+
+    h2
+    | コメント一覧
+    -@comments.each do |c|
+        = link_to c.user.email , user_path(c.user.id)
+        = c.content
+        br
+
+    = form_for [@tweet, @comment] do |f|
+        = f.text_field :content
+        br
+        = f.submit 'コメントする'
+    - if @like == nil
+        = button_to "いいね", tweet_likes_path(@tweet.id)
+    - else
+        = button_to "いいね消す", tweet_like_path(@tweet.id, @like.id), method: :delate
+    いいね =@likes.count
+
+= link_to "Tweet一覧に戻る", tweets_path
