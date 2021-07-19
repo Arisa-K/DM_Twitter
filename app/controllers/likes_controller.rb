@@ -4,7 +4,7 @@ class LikesController < ApplicationController
         @likes = Like.where(tweet_id: params[:tweet_id])
     end
     def create
-        Like.create(tweet_id: params[:tweet_id],　user_id: current_user.id)
+        Like.create(tweet_id: params[:tweet_id], user_id: current_user.id)
         redirect_back(fallback_location: root_path)
     end
 
